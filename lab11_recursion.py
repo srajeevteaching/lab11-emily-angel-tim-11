@@ -1,4 +1,4 @@
-# Team Names:
+# Team Names: Tim Hunt, Emily Catanzariti, Angel Scott
 # Course: CS151, Dr. Rajeev
 # Lab Number: 11
 # Problem Summary: Compare iterative and recursive implementations of fibonacci
@@ -121,7 +121,24 @@ def binary_search_iterative(sorted_list, value):
 # Returns: The index of the value in the list, or -1 if it does not present
 def binary_search_recursive(sorted_list, value, start, end):
 
-    # TODO: Implement this function using recursion
+    # find index at middle of range (use integer division)
+    mid = (start + end) // 2
+
+    # if value is at the middle index
+    if sorted_list[mid] == value:
+        # found the value: return the index
+        return mid
+
+    # else if value is smaller than what is at middle index
+    elif value < sorted_list[mid]:
+        # search in first half (discard second half), call function on itself
+        end = mid - 1
+
+    else:
+        # search in second half (discard first half), call function on itself
+        start = mid + 1
+    binary_search_recursive(sorted_list, value, start, end)
+
 
     return -1
 
@@ -241,7 +258,9 @@ def get_menu_choice():
 # Parameters: none
 # Returns: none
 def main():
-
+    # test case for binary recursive function
+    sorted_list = [2, 3, 4, 5, 7, 9, 10]
+    print(binary_search_recursive(sorted_list, 3, 0, len(sorted_list)-1))
     # output purpose
     print("This program measures the running time of various functions.")
 
